@@ -66,15 +66,15 @@ jobs:
       pathtoPublish: $(Build.SourcesDirectory)\$(tagartifact)-win64.tar.gz
       artifactName: $(tagartifact)-win64.tar.gz
 
-  - task: S3Upload@1
-    inputs:
-      awsCredentials: 'SLOBS_BE_AWS'
-      regionName: 'us-west-2'
-      bucketName: 'slobs-crash-handler'
-      globExpressions: '$(tagartifact)-win64.tar.gz'
-      filesAcl: 'public-read'
-    displayName: 'Upload tag artifact to S3'
-    condition: and(succeeded(), contains(variables['Build.SourceBranch'], 'tags'))
+  # - task: S3Upload@1
+  #   inputs:
+  #     awsCredentials: 'SLOBS_BE_AWS'
+  #     regionName: 'us-west-2'
+  #     bucketName: 'slobs-crash-handler'
+  #     globExpressions: '$(tagartifact)-win64.tar.gz'
+  #     filesAcl: 'public-read'
+  #   displayName: 'Upload tag artifact to S3'
+  #   condition: and(succeeded(), contains(variables['Build.SourceBranch'], 'tags'))
 
 - job: 'MacOSX'
   pool:
